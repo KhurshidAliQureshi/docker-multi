@@ -1,0 +1,39 @@
+{
+    "AWSEBDokcerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "sh33dz/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "sh33dz/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "sh33dz/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "sh33dz/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMapping": [
+                {
+                    "hostport": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": [
+                "client",
+                "server"
+            ]
+        }
+    ]
+}
